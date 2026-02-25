@@ -1,0 +1,154 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .safe-top {
+    padding-top: max(1rem, env(safe-area-inset-top));
+  }
+  .safe-bottom {
+    padding-bottom: max(1.5rem, env(safe-area-inset-bottom));
+  }
+}
+
+:root {
+  --safe-area-inset-top: env(safe-area-inset-top);
+  --safe-area-inset-bottom: env(safe-area-inset-bottom);
+}
+
+.conic-gradient {
+  background: conic-gradient(
+    from 180deg,
+    #8b93ff 0% 8%,
+    #ffad84 8% 28%,
+    #7ee0b3 28% 55%,
+    #ff8f9c 55% 67%,
+    #ffe17b 67% 74%,
+    #ff8f9c 74% 100%
+  );
+}
+
+.nutrition-chart-ring {
+  position: relative;
+  width: 260px;
+  height: 260px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nutrition-chart-ring::before {
+  content: "";
+  position: absolute;
+  inset: 15px;
+  background: white;
+  border-radius: 50%;
+  z-index: 1;
+}
+
+.dark .nutrition-chart-ring::before {
+  background: #0f172a;
+}
+
+.camera-overlay {
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.4) 0%,
+    rgba(0, 0, 0, 0) 20%,
+    rgba(0, 0, 0, 0) 80%,
+    rgba(0, 0, 0, 0.6) 100%
+  );
+}
+
+.glass-tag {
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.ar-line {
+  stroke-dasharray: 4;
+  animation: dash 10s linear infinite;
+}
+
+@keyframes dash {
+  to {
+    stroke-dashoffset: 100;
+  }
+}
+
+.scan-line {
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #7c3aed, transparent);
+  animation: scan 3s ease-in-out infinite;
+}
+
+@keyframes scan {
+  0%,
+  100% {
+    top: 20%;
+    opacity: 0;
+  }
+  50% {
+    top: 60%;
+    opacity: 1;
+  }
+}
+
+.ios-blur {
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+html, body, #root {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #f7f8f5; /* Light mode background */
+}
+
+.dark html, .dark body, .dark #root {
+  background-color: #1a2210; /* Dark mode background */
+}
+
+body {
+  min-height: 100%;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.scanner-line {
+  animation: scan-barcode 2.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+@keyframes scan-barcode {
+  0% { transform: translateY(-100%); opacity: 0; }
+  50% { opacity: 1; }
+  100% { transform: translateY(100%); opacity: 0; }
+}
+
+.glass-panel {
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* Fix for camera stretching on Android */
+.scanner-video {
+  object-fit: cover !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+body.barcode-scanner-active,
+body.barcode-scanner-active #root,
+body.barcode-scanner-active .bg-background-dark {
+  background: transparent !important;
+}

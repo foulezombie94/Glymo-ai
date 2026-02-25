@@ -1,0 +1,12 @@
+{
+  "appId": "com.glymo.ai",
+  "appName": "Glymo AI",
+  "webDir": "dist",
+  "bundledWebRuntime": false,
+  "plugins": {
+    "StatusBar": {
+      "overlay": true,
+      "style": "DARK"
+    }
+  }
+}
