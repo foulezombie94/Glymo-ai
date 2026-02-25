@@ -1,23 +1,31 @@
-# Base image for Node.js
-FROM node:18-slim
-
-# Set working directory
+# Stage 1: Build the Expo Web App
+FROM node:18 AS builder
 WORKDIR /app
 
-# Copy package files for the server
-COPY server/package*.json ./
+# Copy package files for the root project (Expo)
+COPY package*.json ./
+RUN npm install --legacy-peer-deps
 
-# Install backend dependencies
+# Copy all files and export for web
+COPY . .
+RUN npx expo export --platform web
+
+# Stage 2: Run the Node.js Server
+FROM node:18-slim
+WORKDIR /app
+
+# Copy server package files
+COPY server/package*.json ./
 RUN npm install
 
-# Copy the server source code
+# Copy server code
 COPY server/ .
 
-# Expose the port used by Cloud Run
-EXPOSE 8080
+# Copy the built web apps from the builder stage into server's dist folder
+COPY --from=builder /app/dist ./dist
 
-# Environment variable for Cloud Run
+# Expose the port for Cloud Run
+EXPOSE 8080
 ENV PORT=8080
 
-# Command to start the server
 CMD ["node", "index.js"]
