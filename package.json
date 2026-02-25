@@ -28,7 +28,8 @@
     "react-native-screens": "~4.16.0",
     "react-native-svg": "15.12.1",
     "react-native-url-polyfill": "^3.0.0",
-    "tailwindcss": "3.3.2"
+    "tailwindcss": "3.3.2",
+    "express": "^4.18.2"
   },
   "private": true,
   "devDependencies": {
