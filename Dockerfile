@@ -1,5 +1,5 @@
 # Base image for Node.js
-FROM node:20-alpine
+FROM reactnativecommunity/react-native-android:latest
 
 # Set working directory
 WORKDIR /app

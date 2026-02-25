@@ -1,13 +1,13 @@
 steps:
   # Step 1: Install Node.js dependencies
-  - name: 'node:20'
+  - name: 'reactnativecommunity/react-native-android'
     id: 'install-deps'
     entrypoint: 'npm'
     args: ['install']
 
   # Step 2: Run Expo Prebuild
   # We use --no-install because we already did it in Step 1
-  - name: 'node:20'
+  - name: 'reactnativecommunity/react-native-android'
     id: 'expo-prebuild'
     entrypoint: 'npx'
     args: ['expo', 'prebuild', '--platform', 'android', '--no-install']
