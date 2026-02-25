@@ -1,23 +1,19 @@
 import React, { useState, useMemo, useEffect } from 'react';
-import { View, Text, ScrollView, TouchableOpacity, Image, Dimensions, ActivityIndicator } from 'react-native';
+import { View, Text, ScrollView, TouchableOpacity, Image, ActivityIndicator } from 'react-native';
 import { useMeals } from '../context/MealContext.js';
 import { supabase } from '../lib/supabase';
 import { 
-  LayoutGrid, 
-  Bell, 
   Zap, 
   ChevronRight, 
   TrendingUp, 
-  Target, 
   Barcode, 
   Flame,
   ArrowUpRight,
-  Droplets,
   Scale
 } from 'lucide-react-native';
-import Svg, { Circle, Defs, LinearGradient, Stop } from 'react-native-svg';
+import Svg, { Circle } from 'react-native-svg';
 
-const { width } = Dimensions.get('window');
+
 
 const DonutChart = ({ calories, goal }) => {
   const size = 180;
@@ -85,7 +81,7 @@ export default function HomeScreen({ navigation }) {
     fetchProfile();
   }, []);
 
-  const { totals } = useMemo(() => getTotalsByRange('today'), [meals, getTotalsByRange]);
+  const { totals } = useMemo(() => getTotalsByRange('today'), [getTotalsByRange]);
 
   const displayName = profile?.full_name ? profile.full_name.split(' ')[0] : 'User';
 

@@ -36,8 +36,8 @@ export const registerRefreshToken = async (userId, token, expiresAt) => {
         user_agent: 'React Native (' + Platform.OS + ')'
       }]);
     if (error) console.error('Error registering refresh token:', error);
-  } catch (err) {
-    console.error('Unexpected error registering token:', err);
+  } catch (_err) {
+    console.error('Unexpected error registering token:', _err);
   }
 };
 
@@ -55,7 +55,7 @@ export const logoutUser = async () => {
         .eq('token', session.refresh_token);
     }
     await supabase.auth.signOut();
-  } catch (err) {
-    console.error('Logout error:', err);
+  } catch (_err) {
+    console.error('Logout error:', _err);
   }
 };

@@ -1,0 +1,4 @@
+(node:27876) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/pc/.gemini/antigravity/scratch/ai-calorie-app/eslint.config.js?mtime=1772030405635 is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to C:\Users\pc\.gemini\antigravity\scratch\ai-calorie-app\package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)

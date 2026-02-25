@@ -2,24 +2,17 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, ScrollView, Image, TextInput, Alert, ActivityIndicator } from 'react-native';
 import { supabase, logoutUser } from '../lib/supabase.js';
 import { 
-  User, 
-  Settings, 
   ChevronRight, 
   LogOut, 
   Shield, 
   Bell, 
-  Ruler, 
-  Scale, 
-  Target,
   Zap,
-  Camera,
-  CheckCircle2,
-  Lock
+  Camera
 } from 'lucide-react-native';
 import { useMeals } from '../context/MealContext.js';
 
 export default function ProfileScreen({ navigation }) {
-  const { calorieGoal, weightTrend, bmi, userHeight } = useMeals();
+  const { calorieGoal, bmi } = useMeals();
   const [loading, setLoading] = useState(false);
   const [profile, setProfile] = useState(null);
   
@@ -48,8 +41,8 @@ export default function ProfileScreen({ navigation }) {
           setHeight(data.height?.toString() || '');
         }
       }
-    } catch (err) {
-      console.error(err);
+    } catch (_err) {
+      console.error(_err);
     }
   };
 
@@ -69,8 +62,8 @@ export default function ProfileScreen({ navigation }) {
 
       if (error) throw error;
       Alert.alert("Succès", "Profil mis à jour !");
-    } catch (err) {
-      Alert.alert("Erreur", err.message);
+    } catch (_err) {
+      Alert.alert("Erreur", _err.message);
     } finally {
       setLoading(false);
     }

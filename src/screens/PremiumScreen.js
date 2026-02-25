@@ -1,8 +1,8 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, Image, ScrollView, Dimensions, StyleSheet, Alert } from 'react-native';
-import { X, CheckCircle2, Zap, Star, ShieldCheck, ArrowRight, Leaf } from 'lucide-react-native';
+import { View, Text, TouchableOpacity, Image, ScrollView, Alert } from 'react-native';
+import { X, CheckCircle2, Star, ArrowRight } from 'lucide-react-native';
 
-const { width } = Dimensions.get('window');
+
 
 const FeatureItem = ({ text }) => (
   <View className="flex-row items-center gap-3 mb-3">

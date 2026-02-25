@@ -1,10 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { View, Text, TouchableOpacity, ActivityIndicator, Alert, Image, StyleSheet } from 'react-native';
 import { CameraView, useCameraPermissions } from 'expo-camera';
-import { ChevronLeft, RefreshCw, ArrowLeft, Zap, Image as ImageIcon, History as HistoryIcon, Check, X, Barcode, Camera } from 'lucide-react-native';
+import { ChevronLeft, RefreshCw, Image as ImageIcon, History as HistoryIcon, Barcode, Camera } from 'lucide-react-native';
 import { supabase } from '../lib/supabase.js';
 import { fetchProductByBarcode } from '../lib/off.js';
-import { useMeals } from '../context/MealContext.js';
+
 
 export default function ScannerScreen({ navigation, route }) {
   const [permission, requestPermission] = useCameraPermissions();
@@ -12,11 +12,11 @@ export default function ScannerScreen({ navigation, route }) {
   const [capturedImage, setCapturedImage] = useState(null);
   const [facing, setFacing] = useState(/** @type {'back' | 'front'} */ ('back'));
   const [isFrozen, setIsFrozen] = useState(false);
-  const [detectedProduct, setDetectedProduct] = useState(null);
+
   const [isSearchingBarcode, setIsSearchingBarcode] = useState(false);
   const [scanMode, setScanMode] = useState(route.params?.mode || 'ai'); // 'ai' or 'barcode'
   
-  const { addMeal } = useMeals();
+
   const cameraRef = useRef(null);
 
   useEffect(() => {
@@ -47,7 +47,7 @@ export default function ScannerScreen({ navigation, route }) {
       setCapturedImage(photo.uri);
       setIsFrozen(true);
       await identifyMeal(photo.base64);
-    } catch (err) {
+    } catch {
       Alert.alert("Error", "Failed to take photo");
     }
   };
@@ -67,7 +67,7 @@ export default function ScannerScreen({ navigation, route }) {
         Alert.alert("Not Found", "Product not found nearby.");
         setIsFrozen(false);
       }
-    } catch (err) {
+    } catch {
       Alert.alert("Error", "Failed to search product.");
       setIsFrozen(false);
     } finally {
@@ -94,8 +94,8 @@ export default function ScannerScreen({ navigation, route }) {
       } else {
          throw new Error("Invalid AI response");
       }
-    } catch (err) {
-      console.error(err);
+    } catch (_err) {
+      console.error(_err);
       Alert.alert("Analysis Failed", "Could not identify the meal. Try again.");
       setIsFrozen(false);
       setCapturedImage(null);
@@ -104,19 +104,9 @@ export default function ScannerScreen({ navigation, route }) {
     }
   };
 
-  const onAddMeal = async () => {
-    if (!detectedProduct) return;
-    try {
-      await addMeal(detectedProduct);
-      Alert.alert("Success", "Added to your journal!");
-      resetScanner();
-    } catch (err) {
-      Alert.alert("Error", "Failed to add meal.");
-    }
-  };
 
   const resetScanner = () => {
-    setDetectedProduct(null);
+
     setCapturedImage(null);
     setIsFrozen(false);
     setIsAnalyzing(false);

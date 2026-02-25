@@ -1,5 +1,0 @@
-# Exclure les dossiers natifs Capacitor du build Netlify
-/android
-/ios
-/node_modules/@capacitor/android
-/node_modules/@capacitor/ios

@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { supabase } from '../lib/supabase';
-import { logSecurity } from '../lib/logger';
+
 import { startOfDay, endOfDay, subDays, startOfWeek, format, isSameDay } from 'date-fns';
 
 const MealContext = createContext(null);
@@ -37,8 +37,8 @@ export const MealProvider = ({ children }) => {
       } else if (data) {
         setMeals(data);
       }
-    } catch (err) {
-      console.error('Unexpected error fetching from Supabase:', err);
+    } catch (_err) {
+      console.error('Unexpected error fetching from Supabase:', _err);
     } finally {
       setLoading(false);
     }
@@ -79,8 +79,8 @@ export const MealProvider = ({ children }) => {
           setWeightTrend({ latest: Number(profile.weight), diff: 0 });
         }
       }
-    } catch (err) {
-      console.error('Unexpected error in profile fetch:', err);
+    } catch (_err) {
+      console.error('Unexpected error in profile fetch:', _err);
     }
   }, [weightLogs]);
 
@@ -101,8 +101,8 @@ export const MealProvider = ({ children }) => {
       } else if (data) {
         setWaterToday(data.reduce((sum, log) => sum + (Number(log.amount_ml) || 0), 0));
       }
-    } catch (err) {
-      console.error('Unexpected error fetching water', err);
+    } catch (_err) {
+      console.error('Unexpected error fetching water', _err);
     }
   }, []);
 
@@ -129,8 +129,8 @@ export const MealProvider = ({ children }) => {
           setWeightTrend({ latest, diff: 0 });
         }
       }
-    } catch (err) {
-      console.error('Unexpected error fetching weight', err);
+    } catch (_err) {
+      console.error('Unexpected error fetching weight', _err);
     }
   }, []);
 
@@ -162,7 +162,7 @@ export const MealProvider = ({ children }) => {
     });
 
     return () => subscription.unsubscribe();
-  }, [fetchMealsForUser, fetchWeightLogs, fetchWaterLogs]);
+  }, [fetchMealsForUser, fetchWeightLogs, fetchWaterLogs, fetchProfileAndGoals]);
 
   const addMeal = React.useCallback(async (mealData) => {
     const tempId = Date.now().toString();
@@ -200,8 +200,8 @@ export const MealProvider = ({ children }) => {
       } else if (data && data.length > 0) {
         setMeals(prev => prev.map(m => m.id === tempId ? data[0] : m));
       }
-    } catch (err) {
-      console.error('Unexpected error saving meal:', err);
+    } catch (_err) {
+      console.error('Unexpected error saving meal:', _err);
     }
   }, []);
 
@@ -215,8 +215,8 @@ export const MealProvider = ({ children }) => {
         console.error('Failed to delete meal:', error);
         setMeals(previousMeals);
       }
-    } catch (err) {
-      console.error('Unexpected error deleting meal:', err);
+    } catch (_err) {
+      console.error('Unexpected error deleting meal:', _err);
       setMeals(previousMeals);
     }
   }, [meals]);

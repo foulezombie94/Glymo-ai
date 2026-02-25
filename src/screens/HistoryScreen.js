@@ -1,10 +1,10 @@
 import React, { useMemo } from 'react';
-import { View, Text, FlatList, TouchableOpacity, Alert, ScrollView, Dimensions, Image } from 'react-native';
+import { View, Text, FlatList, TouchableOpacity, Alert, Image } from 'react-native';
 import { useMeals } from '../context/MealContext.js';
-import { Trash2, ChevronRight, History as HistoryIcon, LayoutGrid, TrendingUp, Flame, Calendar, Award } from 'lucide-react-native';
-import Svg, { Rect, G, Text as SvgText } from 'react-native-svg';
+import { Trash2, History as HistoryIcon, LayoutGrid, TrendingUp, Flame, Calendar } from 'lucide-react-native';
 
-const { width } = Dimensions.get('window');
+
+
 
 const AnalyticsCard = ({ title, value, unit, icon: Icon, color }) => (
   <View className="flex-1 bg-white dark:bg-slate-900 p-5 rounded-[32px] border border-slate-50 dark:border-slate-800 shadow-sm">
@@ -20,7 +20,7 @@ const AnalyticsCard = ({ title, value, unit, icon: Icon, color }) => (
 
 export default function HistoryScreen() {
   const { meals, deleteMeal, getWeeklyStats, calorieGoal } = useMeals();
-  const { weeklyData, totalWeeklyCalories } = useMemo(() => getWeeklyStats(), [meals, getWeeklyStats]);
+  const { weeklyData, totalWeeklyCalories } = useMemo(() => getWeeklyStats(), [getWeeklyStats]);
 
   const avgCalories = Math.round(totalWeeklyCalories / 7);
 

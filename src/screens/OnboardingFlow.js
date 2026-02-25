@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TouchableOpacity, TextInput, ScrollView, ActivityIndicator, Alert, Dimensions, Platform } from 'react-native';
+import { View, Text, TouchableOpacity, TextInput, ScrollView, ActivityIndicator, Alert } from 'react-native';
 import { supabase } from '../lib/supabase';
 import { logSecurity } from '../lib/logger';
 import { 
@@ -14,17 +14,12 @@ import {
   Zap, 
   Flame, 
   CheckCircle2,
-  Globe,
-  User,
-  Ruler,
-  Scale,
-  Calendar,
-  Activity
+  Globe
 } from 'lucide-react-native';
 
-const { width } = Dimensions.get('window');
 
-const LANGUAGES = ['EN', 'FR', 'ES'];
+
+
 
 const CONTENT = {
   EN: {
@@ -146,7 +141,7 @@ export default function OnboardingFlow() {
 
   // Calculate calories whenever relevant data changes
   useEffect(() => {
-    let mb = 0;
+    let mb;
     const w = parseFloat(weight) || 70;
     const h = parseFloat(height) || 175;
     const a = parseInt(age) || 30;
@@ -206,8 +201,8 @@ export default function OnboardingFlow() {
       logSecurity('ONBOARDING_COMPLETE', 'INFO', { goal, weight });
       
       // Navigation will be handled by AppNavigator observing profiles table updates
-    } catch (err) {
-      Alert.alert("Erreur", err.message);
+    } catch (_err) {
+      Alert.alert("Erreur", _err.message);
     } finally {
       setLoading(false);
     }
@@ -368,7 +363,7 @@ export default function OnboardingFlow() {
            onPress={() => step > 1 ? setStep(step - 1) : null}
            className={`w-12 h-12 rounded-full items-center justify-center bg-slate-100 dark:bg-slate-800 ${step === 1 ? 'opacity-0' : 'opacity-100'}`}
          >
-           <ArrowLeft size={24} color={lang === 'FR' ? '#1e293b' : '#1e293b'} style={{ color: '#64748b' }} />
+           <ArrowLeft size={24} color="#64748b" />
          </TouchableOpacity>
          
          <View className="flex-row items-center gap-2">

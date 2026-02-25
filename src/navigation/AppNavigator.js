@@ -1,8 +1,8 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { LayoutDashboard, Scan, User, List, Zap, Shield } from 'lucide-react-native';
-import { View, ActivityIndicator, Alert, Text, StyleSheet, Platform } from 'react-native';
+import { LayoutDashboard, Scan, User, List } from 'lucide-react-native';
+import { View, ActivityIndicator } from 'react-native';
 import { supabase, registerRefreshToken } from '../lib/supabase';
 import HomeScreen from '../screens/HomeScreen.js';
 import ScannerScreen from '../screens/ScannerScreen.js';
@@ -74,7 +74,7 @@ export default function AppNavigator() {
           }
           setLoading(false);
         }
-      } catch (err) {
+      } catch {
         if (isMounted) setLoading(false);
       }
     };

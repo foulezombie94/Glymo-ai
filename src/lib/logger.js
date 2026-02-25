@@ -32,7 +32,7 @@ export const logSecurity = async (action, severity = 'INFO', metadata = {}) => {
     if (error) {
       console.error('Failed to write security log:', error);
     }
-  } catch (err) {
-    console.error('Unexpected error in logger:', err);
+  } catch (_err) {
+    console.error('Unexpected error in logger:', _err);
   }
 };

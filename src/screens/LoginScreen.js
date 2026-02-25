@@ -33,8 +33,8 @@ export default function LoginScreen() {
       if (isSignUp) {
         Alert.alert("Check your email", "We've sent you a confirmation link.");
       }
-    } catch (err) {
-      Alert.alert("Auth Error", err.message);
+    } catch (_err) {
+      Alert.alert("Auth Error", _err.message);
     } finally {
       setLoading(false);
     }

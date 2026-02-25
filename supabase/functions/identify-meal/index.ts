@@ -1,3 +1,4 @@
+// @ts-ignore
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts"
 
 const corsHeaders = {
@@ -13,6 +14,7 @@ serve(async (req: Request) => {
   try {
     const body = await req.json()
     const imageBase64 = body.image
+    // @ts-ignore
     const apiKey = Deno.env.get('GEMINI_API_KEY')
 
     if (!apiKey) {

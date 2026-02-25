@@ -1,21 +1,17 @@
-import React, { useMemo } from 'react';
-import { View, Text, ScrollView, TouchableOpacity, Image, Dimensions, StyleSheet } from 'react-native';
+import React from 'react';
+import { View, Text, ScrollView, TouchableOpacity, Image } from 'react-native';
 import { 
   ArrowLeft, 
-  CheckCircle2, 
-  Leaf, 
   Zap, 
-  History, 
   Flame, 
   Box, 
   PlusCircle,
-  AlertCircle,
-  Info
+  AlertCircle
 } from 'lucide-react-native';
 import { useMeals } from '../context/MealContext';
 import { logSecurity } from '../lib/logger';
 
-const { width } = Dimensions.get('window');
+
 
 const MacroItem = ({ label, value, color, icon: Icon }) => (
   <View className="flex-1 bg-slate-50 dark:bg-slate-800/50 p-4 rounded-3xl items-center border border-slate-100 dark:border-slate-800">
@@ -60,8 +56,8 @@ export default function ResultsDetailScreen({ route, navigation }) {
       await addMeal(mealData);
       logSecurity('MEAL_LOGGED', 'INFO', { meal_name: mealData.name, source: 'scan' });
       navigation.navigate('Main', { screen: 'Dashboard' });
-    } catch (err) {
-      console.error(err);
+    } catch (_err) {
+      console.error(_err);
     }
   };
 
