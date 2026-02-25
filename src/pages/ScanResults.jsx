@@ -32,13 +32,13 @@ export default function ScanResults() {
 
   return (
     <motion.div 
-      className="bg-background-light dark:bg-background-dark font-inter text-slate-900 dark:text-slate-100 min-h-screen flex justify-center items-center p-0 sm:p-4"
+      className="bg-background-light dark:bg-background-dark font-inter text-slate-900 dark:text-slate-100 h-screen flex justify-center items-center p-0 sm:p-4"
       variants={pageVariants}
       initial="initial"
       animate="animate"
       exit="exit"
     >
-      <div className="relative w-full max-w-[375px] h-[812px] max-h-screen bg-white dark:bg-slate-900 sm:rounded-[40px] shadow-2xl overflow-hidden sm:border-[8px] border-slate-900 dark:border-slate-800">
+      <div className="relative w-full max-w-[375px] h-full bg-white dark:bg-slate-900 sm:rounded-[40px] shadow-2xl overflow-hidden sm:border-[8px] border-slate-900 dark:border-slate-800">
         
         {/* Status Bar */}
         <div className="absolute top-0 w-full h-11 flex justify-between items-center px-8 z-50 text-white">

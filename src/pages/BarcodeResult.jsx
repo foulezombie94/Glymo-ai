@@ -111,7 +111,7 @@ export default function BarcodeResult() {
 
   if (!p) {
     return (
-      <div className="bg-background-dark min-h-screen flex flex-col items-center justify-center gap-4 text-white">
+      <div className="bg-background-dark h-screen flex flex-col items-center justify-center gap-4 text-white">
         <span className="material-symbols-rounded text-slate-500" style={{ fontSize: 64 }}>qr_code_scanner</span>
         <p className="text-slate-400">No product data. Please scan a barcode first.</p>
         <button onClick={() => navigate(-1)} className="px-6 py-3 bg-primary text-slate-900 rounded-xl font-bold">Go back</button>
@@ -121,16 +121,16 @@ export default function BarcodeResult() {
 
   return (
     <motion.div
-      className="bg-background-dark font-display min-h-screen text-slate-100"
+      className="bg-background-dark font-display h-screen text-slate-100"
       variants={pageVariants}
       initial="initial"
       animate="animate"
       exit="exit"
     >
-      <div className="relative w-full max-w-md mx-auto min-h-screen flex flex-col">
+      <div className="relative w-full max-w-md mx-auto h-full flex flex-col">
 
         {/* Top App Bar */}
-        <div className="sticky top-0 z-20 flex items-center justify-between p-4 bg-background-dark/80 backdrop-blur-md border-b border-white/5">
+        <div className="sticky top-0 z-20 flex items-center justify-between p-4 bg-background-dark/80 backdrop-blur-md border-b border-white/5 flex-shrink-0">
           <button onClick={() => navigate(-1)} className="flex items-center justify-center size-10 rounded-full bg-white/10 text-white hover:bg-white/20 transition-colors">
             <span className="material-symbols-rounded">arrow_back</span>
           </button>
@@ -139,7 +139,7 @@ export default function BarcodeResult() {
         </div>
 
         {/* Product Header */}
-        <div className="flex items-center gap-4 px-5 py-5 bg-gradient-to-b from-zinc-800 to-background-dark border-b border-white/5">
+        <div className="flex items-center gap-4 px-5 py-5 bg-gradient-to-b from-zinc-800 to-background-dark border-b border-white/5 flex-shrink-0">
           {p.image_url ? (
             <img src={p.image_url} alt={p.name} className="w-20 h-20 rounded-2xl object-cover shadow-lg border border-white/10 flex-shrink-0" />
           ) : (
@@ -154,7 +154,7 @@ export default function BarcodeResult() {
           </div>
         </div>
 
-        <div className="flex-1 px-5 pb-32 flex flex-col gap-5 mt-4">
+        <div className="flex-1 px-5 pb-32 flex flex-col gap-5 mt-4 overflow-y-auto no-scrollbar">
 
           {/* Scores Row */}
           {(p.nutriscore_grade || p.ecoscore_grade || p.nova_group) && (

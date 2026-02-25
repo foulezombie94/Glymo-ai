@@ -43,7 +43,7 @@ export default function Dashboard() {
 
   if (loading) {
     return (
-      <div className="bg-background-light dark:bg-background-dark min-h-screen flex items-center justify-center font-display">
+      <div className="bg-background-light dark:bg-background-dark h-screen flex items-center justify-center font-display">
         <div className="animate-spin text-[#6af425] material-symbols-rounded text-5xl">progress_activity</div>
       </div>
     );
