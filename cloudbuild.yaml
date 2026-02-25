@@ -1,52 +1,28 @@
-# Trigger Build: Switch to specialized Android build environment
 steps:
-  # Step 1: Install Node.js dependencies
-  - name: 'reactnativecommunity/react-native-android'
-    id: 'install-deps'
-    entrypoint: 'npm'
-    args: ['install', '--legacy-peer-deps']
+  # Step 1: Build the Docker image
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'gcr.io/$PROJECT_ID/glymo-ai-server', '.']
 
-  # Step 2: Run Expo Prebuild
-  # We use --no-install because we already did it in Step 1
-  - name: 'reactnativecommunity/react-native-android'
-    id: 'expo-prebuild'
-    entrypoint: 'npx'
-    args: ['expo', 'prebuild', '--platform', 'android', '--no-install']
+  # Step 2: Push the image to Container Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'gcr.io/$PROJECT_ID/glymo-ai-server']
 
-  # Step 3: Fix Gradle permissions & Accept Licenses
-  # gradlew needs to be executable on Linux builders
-  - name: 'bash'
-    id: 'prepare-gradle'
+  # Step 3: Deploy to Google Cloud Run
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: gcloud
     args:
-      - '-c'
-      - |
-        chmod +x android/gradlew
-        # Accept android licenses if sdkmanager is present
-        if command -v sdkmanager &> /dev/null; then
-          yes | sdkmanager --licenses
-        fi
-
-  # Step 4: Build the Android APK using Gradle
-  # We use assembleDebug initially to avoid Keystore/Signing errors
-  - name: 'reactnativecommunity/react-native-android'
-    id: 'build-apk'
-    args: ['./gradlew', 'assembleDebug']
-    dir: 'android'
-    env:
-      - 'JAVA_OPTS=-Xmx4g' # Give more heap to Gradle
-
-  # Step 5: List the generated APKs
-  - name: 'bash'
-    id: 'list-artifacts'
-    args: ['ls', '-R', 'android/app/build/outputs/apk/']
-
-artifacts:
-  objects:
-    location: 'gs://glymo-ai-builds/'
-    paths: ['android/app/build/outputs/apk/debug/*.apk']
+      - 'run'
+      - 'deploy'
+      - 'glymo-ai-server'
+      - '--image'
+      - 'gcr.io/$PROJECT_ID/glymo-ai-server'
+      - '--region'
+      - 'europe-west1' # Vous pouvez changer la région ici
+      - '--platform'
+      - 'managed'
+      - '--allow-unauthenticated'
 
 options:
-  machineType: 'E2_HIGHCPU_8' # Use a beefy machine to avoid OOM
   logging: CLOUD_LOGGING_ONLY
 
-timeout: '1800s' # 30 minutes timeout
+timeout: '1200s'

@@ -1,22 +1,23 @@
 # Base image for Node.js
-FROM reactnativecommunity/react-native-android:latest
+FROM node:18-slim
 
 # Set working directory
 WORKDIR /app
 
-# Copy package files first to leverage Docker cache
-COPY package*.json ./
+# Copy package files for the server
+COPY server/package*.json ./
 
-# Install dependencies
-RUN npm install --legacy-peer-deps
+# Install backend dependencies
+RUN npm install
 
-# Copy the rest of the application (including android folder)
-COPY . .
+# Copy the server source code
+COPY server/ .
 
-# Set environment variables if needed
-ENV NODE_ENV=production
+# Expose the port used by Cloud Run
+EXPOSE 8080
 
-# The container doesn't need to run a server for a native build, 
-# but it must exist and be valid for the build engine.
-# We can just use a simple command to keep it alive or exit gracefully.
-CMD ["node", "-v"]
+# Environment variable for Cloud Run
+ENV PORT=8080
+
+# Command to start the server
+CMD ["node", "index.js"]
