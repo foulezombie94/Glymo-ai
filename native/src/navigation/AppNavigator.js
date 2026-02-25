@@ -10,6 +10,8 @@ import ProfileScreen from '../screens/ProfileScreen.js';
 import HistoryScreen from '../screens/HistoryScreen.js';
 import LoginScreen from '../screens/LoginScreen.js';
 import OnboardingFlow from '../screens/OnboardingFlow.js';
+import ResultsDetailScreen from '../screens/ResultsDetailScreen.js';
+import PremiumScreen from '../screens/PremiumScreen.js';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -140,7 +142,11 @@ export default function AppNavigator() {
         // Redirect to Onboarding if not completed
         <Stack.Screen name="Onboarding" component={OnboardingFlow} />
       ) : (
-        <Stack.Screen name="Main" component={MainTabs} />
+        <Stack.Group>
+          <Stack.Screen name="Main" component={MainTabs} />
+          <Stack.Screen name="ResultsDetail" component={ResultsDetailScreen} />
+          <Stack.Screen name="Premium" component={PremiumScreen} />
+        </Stack.Group>
       )}
     </Stack.Navigator>
   );

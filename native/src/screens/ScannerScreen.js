@@ -60,7 +60,9 @@ export default function ScannerScreen({ navigation, route }) {
     try {
       const product = await fetchProductByBarcode(data);
       if (product) {
-        setDetectedProduct(product);
+        setCapturedImage(null); // No photo for barcode usually
+        navigation.navigate('ResultsDetail', { mealData: { ...product, image_url: product.image_url } });
+        resetScanner();
       } else {
         Alert.alert("Not Found", "Product not found nearby.");
         setIsFrozen(false);
@@ -82,14 +84,13 @@ export default function ScannerScreen({ navigation, route }) {
       if (error) throw error;
 
       if (data?.product) {
-        setDetectedProduct({
-          name: data.product.name,
-          calories: data.product.calories,
-          protein: data.product.protein || 0,
-          carbs: data.product.carbs || 0,
-          fats: data.product.fats || 0,
-          image_url: null, // AI scan usually doesn't have a product URL immediately
+        navigation.navigate('ResultsDetail', { 
+          mealData: { 
+            ...data.product, 
+            image_url: `data:image/jpeg;base64,${base64}` 
+          } 
         });
+        resetScanner();
       } else {
          throw new Error("Invalid AI response");
       }
@@ -197,44 +198,7 @@ export default function ScannerScreen({ navigation, route }) {
             </View>
           )}
 
-          {/* Result Overlay */}
-          {detectedProduct && (
-            <View className="absolute bottom-10 left-6 right-6 bg-white dark:bg-slate-900 rounded-[40px] p-8 shadow-2xl border border-slate-100 dark:border-slate-800">
-              <View className="flex-row items-center mb-6">
-                <View className="w-20 h-20 bg-slate-50 dark:bg-slate-800 rounded-3xl items-center justify-center overflow-hidden border border-slate-100 dark:border-slate-700">
-                  {detectedProduct.image_url ? (
-                    <Image source={{ uri: detectedProduct.image_url }} className="w-full h-full" />
-                  ) : (
-                    <View className="p-4 bg-primary/10 rounded-full">
-                       {scanMode === 'ai' ? <Zap color="#7C3AED" size={32} /> : <Barcode color="#7C3AED" size={32} />}
-                    </View>
-                  )}
-                </View>
-                <View className="flex-1 ml-5">
-                  <Text className="font-black text-slate-900 dark:text-white text-xl leading-tight" numberOfLines={2}>{detectedProduct.name}</Text>
-                  <Text className="text-slate-500 dark:text-slate-400 font-bold mt-1 uppercase text-xs tracking-wider">
-                    {detectedProduct.calories} Kcal • {detectedProduct.protein}g Protein
-                  </Text>
-                </View>
-              </View>
-              
-              <View className="flex-row gap-4">
-                <TouchableOpacity 
-                  onPress={resetScanner}
-                  className="flex-1 bg-slate-100 dark:bg-slate-800 py-5 rounded-3xl items-center border border-slate-200 dark:border-slate-700"
-                >
-                  <X color="#64748b" size={24} />
-                </TouchableOpacity>
-                <TouchableOpacity 
-                  onPress={onAddMeal}
-                  className="flex-[3] bg-primary py-5 rounded-3xl flex-row items-center justify-center shadow-lg shadow-primary/30"
-                >
-                  <Check color="white" size={24} />
-                  <Text className="text-white font-black ml-3 text-lg">Log this meal</Text>
-                </TouchableOpacity>
-              </View>
-            </View>
-          )}
+          {/* Result Overlay removed - now navigates to ResultsDetailScreen */}
 
           {/* Bottom Bar (Only when not frozen) */}
           {!isFrozen && (

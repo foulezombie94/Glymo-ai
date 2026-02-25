@@ -48,25 +48,25 @@ export default function LoginScreen() {
       <ScrollView contentContainerStyle={{ flexGrow: 1 }} className="bg-white dark:bg-slate-900">
         <View className="flex-1 px-8 pt-20 pb-10">
           <View className="items-center mb-12">
-            <View className="w-20 h-20 bg-primary dark:bg-slate-800 rounded-[30px] items-center justify-center shadow-2xl shadow-primary/20">
-              <Zap color="white" size={40} />
+            <View className="w-20 h-20 bg-green-500 rounded-[30px] items-center justify-center shadow-2xl shadow-green-500/20">
+              <Zap color="white" size={40} fill="white" />
             </View>
             <Text className="text-3xl font-black text-slate-900 dark:text-white mt-6 tracking-tight">
-              Vitally<Text className="text-primary">.</Text>
+              Glymo<Text className="text-green-500">.</Text>AI
             </Text>
             <Text className="text-slate-500 dark:text-slate-400 mt-2 text-center text-lg">
-              {isSignUp ? "Create your account" : "Welcome back to health"}
+              {isSignUp ? "Créez votre compte" : "Heureux de vous revoir"}
             </Text>
           </View>
 
           <View className="space-y-4">
             <View>
-              <Text className="text-slate-700 dark:text-slate-300 font-bold mb-2 ml-1">Email Address</Text>
+              <Text className="text-slate-700 dark:text-slate-300 font-bold mb-2 ml-1">Adresse Email</Text>
               <View className="flex-row items-center bg-slate-50 dark:bg-slate-800 rounded-2xl px-4 border border-slate-100 dark:border-slate-700">
                 <Mail color="#64748b" size={20} />
                 <TextInput
                   className="flex-1 py-4 ml-3 text-slate-900 dark:text-white"
-                  placeholder="name@example.com"
+                  placeholder="nom@exemple.com"
                   placeholderTextColor="#94a3b8"
                   value={email}
                   onChangeText={setEmail}
@@ -77,7 +77,7 @@ export default function LoginScreen() {
             </View>
 
             <View className="mt-4">
-              <Text className="text-slate-700 dark:text-slate-300 font-bold mb-2 ml-1">Password</Text>
+              <Text className="text-slate-700 dark:text-slate-300 font-bold mb-2 ml-1">Mot de passe</Text>
               <View className="flex-row items-center bg-slate-50 dark:bg-slate-800 rounded-2xl px-4 border border-slate-100 dark:border-slate-700">
                 <Lock color="#64748b" size={20} />
                 <TextInput
@@ -96,21 +96,21 @@ export default function LoginScreen() {
 
             {!isSignUp && (
               <TouchableOpacity className="self-end mt-2">
-                <Text className="text-primary font-bold">Forgot Password?</Text>
+                <Text className="text-green-600 font-bold">Mot de passe oublié ?</Text>
               </TouchableOpacity>
             )}
 
             <TouchableOpacity
               onPress={handleAuth}
               disabled={loading}
-              className="bg-primary dark:bg-slate-800 py-5 rounded-2xl mt-8 flex-row items-center justify-center shadow-xl shadow-primary/20"
+              className="bg-green-500 py-5 rounded-2xl mt-8 flex-row items-center justify-center shadow-xl shadow-green-500/20 active:scale-95"
             >
               {loading ? (
                 <ActivityIndicator color="white" />
               ) : (
                 <>
                   <Text className="text-white font-black text-lg mr-2">
-                    {isSignUp ? "Get Started" : "Sign In"}
+                    {isSignUp ? "Commencer" : "Se connecter"}
                   </Text>
                   <ChevronRight color="white" size={20} />
                 </>
@@ -123,9 +123,9 @@ export default function LoginScreen() {
               onPress={() => setIsSignUp(!isSignUp)}
               className="flex-row justify-center py-4"
             >
-              <Text className="text-slate-500 dark:text-slate-400 font-medium">
-                {isSignUp ? "Already have an account?" : "New to Vitally?"}{' '}
-                <Text className="text-primary font-bold">{isSignUp ? "Sign In" : "Create Account"}</Text>
+              <Text className="text-slate-500 dark:text-slate-400 font-medium text-center">
+                {isSignUp ? "Déjà un compte ?" : "Nouveau sur Glymo ?"}{' '}
+                <Text className="text-green-600 font-bold">{isSignUp ? "Se connecter" : "Créer un compte"}</Text>
               </Text>
             </TouchableOpacity>
           </View>
