@@ -54,22 +54,6 @@ export default function ProfileScreen() {
       <View className="px-6 mb-8">
         <Text className="text-xs font-black text-slate-400 uppercase tracking-widest mb-4 ml-2">App Support</Text>
         
-        <TouchableOpacity 
-          onPress={() => {
-            const { Linking } = require('react-native');
-            Linking.openURL('https://glymo-ai.onrender.com');
-          }}
-          className="bg-white dark:bg-slate-800 p-5 rounded-[32px] mb-3 flex-row items-center justify-between border border-slate-100 dark:border-slate-700 shadow-sm"
-        >
-          <View className="flex-row items-center">
-            <View className="w-10 h-10 bg-indigo-50 dark:bg-indigo-900/20 rounded-2xl items-center justify-center">
-               <Share2 color="#6366F1" size={20} />
-            </View>
-            <Text className="ml-4 font-bold text-slate-700 dark:text-slate-300">Visit Website</Text>
-          </View>
-          <ChevronRight color="#CBD5E1" size={20} />
-        </TouchableOpacity>
-
         <TouchableOpacity className="bg-white dark:bg-slate-800 p-5 rounded-[32px] mb-3 flex-row items-center justify-between border border-slate-100 dark:border-slate-700 shadow-sm">
           <View className="flex-row items-center">
             <View className="w-10 h-10 bg-emerald-50 dark:bg-emerald-900/20 rounded-2xl items-center justify-center">
