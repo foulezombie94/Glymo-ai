@@ -1,34 +1,41 @@
-# Logs
-logs
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-lerna-debug.log*
+# Learn more https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files
 
-node_modules
-dist
-dist-ssr
-*.local
+# dependencies
+node_modules/
 
-# Large Files & Reports (Specifically ignored for GitHub)
-final_lint_full.txt
-ts_errors_final.txt
-full_lint_report.json
-*.log
+# Expo
+.expo/
+dist/
+web-build/
+expo-env.d.ts
 
-# Secrets
-.env
-.env.local
+# Native
+.kotlin/
+*.orig.*
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
 
-# Editor directories and files
-.vscode/*
-!.vscode/extensions.json
-.idea
+# Metro
+.metro-health-check*
+
+# debug
+npm-debug.*
+yarn-debug.*
+yarn-error.*
+
+# macOS
 .DS_Store
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
+*.pem
+
+# local env files
+.env*.local
+
+# typescript
+*.tsbuildinfo
+
+# generated native folders
+/ios
+/android

@@ -1,20 +1,13 @@
 import { supabase } from './supabase';
+import { Platform } from 'react-native';
 
 let cachedIp = null;
 
-/**
- * Enregistre un événement de sécurité ou métier dans la table security_logs.
- * 
- * @param {string} action - L'identifiant de l'action (ex: AUTH_LOGIN, SCAN_EAN)
- * @param {'INFO' | 'WARN' | 'ERROR' | 'CRITICAL'} severity - Le niveau d'importance
- * @param {Object} metadata - Données additionnelles au format JSON
- */
 export const logSecurity = async (action, severity = 'INFO', metadata = {}) => {
   try {
     const { data: { session } } = await supabase.auth.getSession();
-    const userAgent = navigator.userAgent;
+    const userAgent = `ReactNative/${Platform.OS} (${Platform.Version})`;
     
-    // Récupération de l'IP publique (mise en cache pour la session)
     if (!cachedIp) {
       try {
         const response = await fetch('https://api.ipify.org?format=json');

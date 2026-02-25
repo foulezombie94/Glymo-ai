@@ -1,13 +1,12 @@
 /** @type {import('tailwindcss').Config} */
-export default {
-  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
-  darkMode: "class",
+module.exports = {
+  content: ["./App.{js,jsx,ts,tsx}", "./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {
       colors: {
-        primary: "#101828", // Nutrition Dashboard primary
-        "primary-scan": "#7C3AED", // Scanner primary
-        "primary-results": "#6366f1", // Results primary
+        primary: "#101828",
+        "primary-scan": "#7C3AED",
+        "primary-results": "#6366f1",
         "background-light": "#F9FAFB",
         "background-dark": "#0F172A",
         "chart-blue": "#8B93FF",
@@ -17,10 +16,6 @@ export default {
         "chart-yellow": "#FFE17B",
         "card-light": "#ffffff",
         "card-dark": "#1e293b",
-      },
-      fontFamily: {
-        display: ["Plus Jakarta Sans", "sans-serif"],
-        inter: ["Inter", "sans-serif"],
       },
       borderRadius: {
         DEFAULT: "24px",
