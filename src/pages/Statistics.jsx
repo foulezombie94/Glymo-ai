@@ -30,9 +30,9 @@ export default function Statistics() {
 
   return (
     <div 
-      className="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen flex justify-center"
+      className="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 h-screen flex justify-center"
     >
-      <div className="w-full max-w-md bg-white dark:bg-slate-900 min-h-screen shadow-2xl relative overflow-hidden flex flex-col">
+      <div className="w-full max-w-md bg-white dark:bg-slate-900 h-full shadow-2xl relative overflow-hidden flex flex-col">
         {/* Status Bar */}
         <div className="px-8 pt-4 pb-2 flex justify-between items-center text-sm font-semibold z-10">
           <span>9:41</span>
