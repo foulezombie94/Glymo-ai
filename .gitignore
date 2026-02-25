@@ -12,6 +12,16 @@ dist
 dist-ssr
 *.local
 
+# Large Files & Reports (Specifically ignored for GitHub)
+final_lint_full.txt
+ts_errors_final.txt
+full_lint_report.json
+*.log
+
+# Secrets
+.env
+.env.local
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
@@ -22,19 +32,3 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
-
-# Large Files & Reports
-*.txt
-*.json
-!package.json
-!app.json
-!package-lock.json
-!capacitor.config.json
-!tsconfig.json
-!jsconfig.json
-!eslint.config.js
-!tailwind.config.js
-!postcss.config.js
-!vite.config.js
-!metro.config.js
-!babel.config.js

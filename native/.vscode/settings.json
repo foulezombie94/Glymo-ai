@@ -1,0 +1,9 @@
+{
+  "css.lint.unknownAtRules": "ignore",
+  "css.lint.validProperties": ["ignore"],
+  "tailwindCSS.includeLanguages": {
+    "javascript": "javascript",
+    "html": "html"
+  },
+  "typescript.tsdk": "node_modules/typescript/lib"
+}
