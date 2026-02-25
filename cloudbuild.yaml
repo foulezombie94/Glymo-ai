@@ -4,7 +4,7 @@ steps:
   - name: 'reactnativecommunity/react-native-android'
     id: 'install-deps'
     entrypoint: 'npm'
-    args: ['install']
+    args: ['install', '--legacy-peer-deps']
 
   # Step 2: Run Expo Prebuild
   # We use --no-install because we already did it in Step 1
