@@ -19,7 +19,13 @@ export default function LoginScreen() {
     setLoading(true);
     try {
       const { error } = isSignUp 
-        ? await supabase.auth.signUp({ email, password })
+        ? await supabase.auth.signUp({ 
+            email, 
+            password,
+            options: {
+              emailRedirectTo: 'https://glymo-ai.onrender.com'
+            }
+          })
         : await supabase.auth.signInWithPassword({ email, password });
 
       if (error) throw error;
