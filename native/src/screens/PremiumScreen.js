@@ -1,7 +1,6 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, Image, ScrollView, Dimensions, StyleSheet, Alert } from 'react-native';
-import { X, CheckCircle2, Zap, Star, ShieldCheck, ArrowRight, Eco } from 'lucide-react-native';
-import { BlurView } from 'expo-blur';
+import { X, CheckCircle2, Zap, Star, ShieldCheck, ArrowRight, Leaf } from 'lucide-react-native';
 
 const { width } = Dimensions.get('window');
 

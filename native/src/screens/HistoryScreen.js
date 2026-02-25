@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { View, Text, FlatList, TouchableOpacity, Alert, ScrollView, Dimensions } from 'react-native';
+import { View, Text, FlatList, TouchableOpacity, Alert, ScrollView, Dimensions, Image } from 'react-native';
 import { useMeals } from '../context/MealContext.js';
 import { Trash2, ChevronRight, History as HistoryIcon, LayoutGrid, TrendingUp, Flame, Calendar, Award } from 'lucide-react-native';
 import Svg, { Rect, G, Text as SvgText } from 'react-native-svg';
