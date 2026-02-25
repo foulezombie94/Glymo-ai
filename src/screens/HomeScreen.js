@@ -54,6 +54,9 @@ const DonutChart = ({ calories, goal }) => {
   );
 };
 
+import PlatformButton from '../components/UI/PlatformButton';
+import PlatformContainer from '../components/UI/PlatformContainer';
+
 export default function HomeScreen({ navigation }) {
   const { 
     meals, 
@@ -94,101 +97,105 @@ export default function HomeScreen({ navigation }) {
   }
 
   return (
-    <ScrollView className="flex-1 bg-[#f8fafc] dark:bg-slate-950" showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: 100 }}>
-      {/* Header */}
-      <View className="px-6 pt-14 pb-6 flex-row justify-between items-center">
-        <View>
-          <Text className="text-slate-400 font-bold uppercase tracking-wider text-[10px]">Your Dashboard</Text>
-          <Text className="text-3xl font-black text-slate-900 dark:text-white">Hello, {displayName}</Text>
-        </View>
-        <TouchableOpacity 
-          onPress={() => navigation.navigate('Profile')}
-          className="w-12 h-12 rounded-2xl overflow-hidden border-2 border-white shadow-sm"
-        >
-          <Image 
-            source={{ uri: profile?.avatar_url || 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&q=80&w=100' }} 
-            className="w-full h-full"
-          />
-        </TouchableOpacity>
-      </View>
-
-      {/* Calories Overview Card */}
-      <View className="px-6 mb-8">
-        <View className="bg-white dark:bg-slate-900 rounded-[40px] p-8 shadow-xl shadow-slate-200/50 dark:shadow-none items-center">
-          <DonutChart calories={totals.calories} goal={calorieGoal} />
-          
-          <View className="flex-row w-full justify-between mt-8 border-t border-slate-50 dark:border-slate-800 pt-8">
-            <View className="items-center">
-              <Text className="text-green-500 font-black text-xl">{totals.protein}g</Text>
-              <Text className="text-slate-400 text-[10px] font-bold uppercase tracking-widest">Protein</Text>
-            </View>
-            <View className="items-center">
-              <Text className="text-blue-500 font-black text-xl">{totals.carbs}g</Text>
-              <Text className="text-slate-400 text-[10px] font-bold uppercase tracking-widest">Carbs</Text>
-            </View>
-            <View className="items-center">
-              <Text className="text-orange-500 font-black text-xl">{totals.fats}g</Text>
-              <Text className="text-slate-400 text-[10px] font-bold uppercase tracking-widest">Fats</Text>
-            </View>
+    <PlatformContainer style={{ flex: 1, backgroundColor: '#f8fafc' }}>
+      <ScrollView className="flex-1" showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: 100 }}>
+        {/* Header */}
+        <View className="px-6 pt-14 pb-6 flex-row justify-between items-center">
+          <View>
+            <Text className="text-slate-400 font-bold uppercase tracking-wider text-[10px]">Your Dashboard</Text>
+            <Text className="text-3xl font-black text-slate-900 dark:text-white">Hello, {displayName}</Text>
           </View>
-        </View>
-      </View>
-
-      {/* Stats Widgets */}
-      <View className="px-6 mb-8 flex-row gap-4">
-        <View className="flex-1 bg-white dark:bg-slate-900 p-6 rounded-[32px] shadow-lg shadow-slate-100/50 dark:shadow-none">
-          <View className="flex-row justify-between mb-4">
-            <View className="bg-indigo-50 dark:bg-indigo-900/20 p-2 rounded-xl">
-              <Scale size={20} color="#6366f1" />
-            </View>
-            <ArrowUpRight size={16} color="#94a3b8" />
-          </View>
-          <Text className="text-slate-400 text-[10px] font-bold uppercase tracking-widest mb-1">BMI</Text>
-          <Text className="text-2xl font-black text-slate-900 dark:text-white">{bmi || '--'}</Text>
-        </View>
-
-        <View className="flex-1 bg-white dark:bg-slate-900 p-6 rounded-[32px] shadow-lg shadow-slate-100/50 dark:shadow-none">
-          <View className="flex-row justify-between mb-4">
-            <View className="bg-emerald-50 dark:bg-emerald-900/20 p-2 rounded-xl">
-              <TrendingUp size={20} color="#10b981" />
-            </View>
-            <ArrowUpRight size={16} color="#94a3b8" />
-          </View>
-          <Text className="text-slate-400 text-[10px] font-bold uppercase tracking-widest mb-1">Weight</Text>
-          <Text className="text-2xl font-black text-slate-900 dark:text-white">{weightTrend.latest} <Text className="text-xs font-bold text-slate-400">kg</Text></Text>
-        </View>
-      </View>
-
-      {/* Quick Actions */}
-      <View className="px-6 mb-8">
-        <Text className="text-lg font-black text-slate-900 dark:text-white mb-4">Add to Logs</Text>
-        <View className="flex-row gap-4">
           <TouchableOpacity 
-            onPress={() => navigation.navigate('Scanner', { mode: 'ai' })}
-            className="flex-1 bg-green-500 p-6 rounded-[32px] shadow-lg shadow-green-500/30 items-center justify-center"
+            onPress={() => navigation.navigate('Profile')}
+            className="w-12 h-12 rounded-2xl overflow-hidden border-2 border-white shadow-sm"
           >
-            <Zap size={28} color="white" fill="white" />
-            <Text className="text-white font-black mt-2">AI Scan</Text>
-          </TouchableOpacity>
-          
-          <TouchableOpacity 
-            onPress={() => navigation.navigate('Scanner', { mode: 'barcode' })}
-            className="flex-1 bg-slate-900 dark:bg-slate-800 p-6 rounded-[32px] shadow-lg shadow-slate-900/20 items-center justify-center"
-          >
-            <Barcode size={28} color="white" />
-            <Text className="text-white font-black mt-2">Barcode</Text>
+            <Image 
+              source={{ uri: profile?.avatar_url || 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&q=80&w=100' }} 
+              className="w-full h-full"
+            />
           </TouchableOpacity>
         </View>
-      </View>
 
-      {/* Recent Meal List */}
-      <View className="px-6">
-        <View className="flex-row justify-between items-end mb-4">
-          <Text className="text-lg font-black text-slate-900 dark:text-white">Recent Activity</Text>
-          <TouchableOpacity onPress={() => navigation.navigate('History')}>
-            <Text className="text-green-600 font-bold text-sm">See all</Text>
-          </TouchableOpacity>
+        {/* Calories Overview Card */}
+        <View className="px-6 mb-8">
+          <View className="bg-white dark:bg-slate-900 rounded-[40px] p-8 shadow-xl shadow-slate-200/50 dark:shadow-none items-center">
+            <DonutChart calories={totals.calories} goal={calorieGoal} />
+            
+            <View className="flex-row w-full justify-between mt-8 border-t border-slate-50 dark:border-slate-800 pt-8">
+              <View className="items-center">
+                <Text className="text-green-500 font-black text-xl">{totals.protein}g</Text>
+                <Text className="text-slate-400 text-[10px] font-bold uppercase tracking-widest">Protein</Text>
+              </View>
+              <View className="items-center">
+                <Text className="text-blue-500 font-black text-xl">{totals.carbs}g</Text>
+                <Text className="text-slate-400 text-[10px] font-bold uppercase tracking-widest">Carbs</Text>
+              </View>
+              <View className="items-center">
+                <Text className="text-orange-500 font-black text-xl">{totals.fats}g</Text>
+                <Text className="text-slate-400 text-[10px] font-bold uppercase tracking-widest">Fats</Text>
+              </View>
+            </View>
+          </View>
         </View>
+
+        {/* Stats Widgets */}
+        <View className="px-6 mb-8 flex-row gap-4">
+          <View className="flex-1 bg-white dark:bg-slate-900 p-6 rounded-[32px] shadow-lg shadow-slate-100/50 dark:shadow-none">
+            <View className="flex-row justify-between mb-4">
+              <View className="bg-indigo-50 dark:bg-indigo-900/20 p-2 rounded-xl">
+                <Scale size={20} color="#6366f1" />
+              </View>
+              <ArrowUpRight size={16} color="#94a3b8" />
+            </View>
+            <Text className="text-slate-400 text-[10px] font-bold uppercase tracking-widest mb-1">BMI</Text>
+            <Text className="text-2xl font-black text-slate-900 dark:text-white">{bmi || '--'}</Text>
+          </View>
+
+          <View className="flex-1 bg-white dark:bg-slate-900 p-6 rounded-[32px] shadow-lg shadow-slate-100/50 dark:shadow-none">
+            <View className="flex-row justify-between mb-4">
+              <View className="bg-emerald-50 dark:bg-emerald-900/20 p-2 rounded-xl">
+                <TrendingUp size={20} color="#10b981" />
+              </View>
+              <ArrowUpRight size={16} color="#94a3b8" />
+            </View>
+            <Text className="text-slate-400 text-[10px] font-bold uppercase tracking-widest mb-1">Weight</Text>
+            <Text className="text-2xl font-black text-slate-900 dark:text-white">{weightTrend.latest} <Text className="text-xs font-bold text-slate-400">kg</Text></Text>
+          </View>
+        </View>
+
+        {/* Quick Actions */}
+        <View className="px-6 mb-8">
+          <Text className="text-lg font-black text-slate-900 dark:text-white mb-4">Add to Logs</Text>
+          <View className="flex-row gap-4">
+            <TouchableOpacity 
+              onPress={() => navigation.navigate('Scanner', { mode: 'ai' })}
+              className="flex-1 bg-green-500 p-6 rounded-[32px] shadow-lg shadow-green-500/30 items-center justify-center"
+            >
+              <Zap size={28} color="white" fill="white" />
+              <Text className="text-white font-black mt-2">AI Scan</Text>
+            </TouchableOpacity>
+            
+            <TouchableOpacity 
+              onPress={() => navigation.navigate('Scanner', { mode: 'barcode' })}
+              className="flex-1 bg-slate-900 dark:bg-slate-800 p-6 rounded-[32px] shadow-lg shadow-slate-900/20 items-center justify-center"
+            >
+              <Barcode size={28} color="white" />
+              <Text className="text-white font-black mt-2">Barcode</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+
+        {/* Recent Meal List */}
+        <View className="px-6">
+          <View className="flex-row justify-between items-end mb-4">
+            <Text className="text-lg font-black text-slate-900 dark:text-white">Recent Activity</Text>
+            <PlatformButton 
+              title="See all" 
+              onPress={() => navigation.navigate('History')}
+              style={{ backgroundColor: 'transparent', padding: 0 }}
+              textStyle={{ color: '#22c55e', fontSize: 14, fontWeight: 'bold' }}
+            />
+          </View>
 
         {meals && meals.length > 0 ? (
           meals.slice(0, 3).map((meal) => (
@@ -216,6 +223,7 @@ export default function HomeScreen({ navigation }) {
           </View>
         )}
       </View>
-    </ScrollView>
+      </ScrollView>
+    </PlatformContainer>
   );
 }
