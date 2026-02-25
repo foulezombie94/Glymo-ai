@@ -28,7 +28,7 @@ steps:
 
   # Step 4: Build the Android APK using Gradle
   # We use assembleDebug initially to avoid Keystore/Signing errors
-  - name: 'gcr.io/cloud-builders/gradle'
+  - name: 'reactnativecommunity/react-native-android'
     id: 'build-apk'
     args: ['./gradlew', 'assembleDebug']
     dir: 'android'
